@@ -1,0 +1,11 @@
+#IDE files
+.idea/
+.vs/
+.vscode/
+
+#tools
+node_modules/
+package-lock.json
+
+#secret files
+.env
