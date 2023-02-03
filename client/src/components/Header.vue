@@ -5,8 +5,9 @@ import '@popperjs/core';
 export default {
   methods: {
     logOut () {
-      this.$store.dispatch('setToken', null)
-      this.$store.dispatch('setUser', null)
+      this.$store.dispatch('setAccessToken', null)
+      this.$store.dispatch('setUpdateToken', null)
+      this.$store.dispatch('setUserID', null)
       this.$router.push({
         name: 'home'
       })

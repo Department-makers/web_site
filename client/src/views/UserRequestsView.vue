@@ -1,11 +1,12 @@
 <script>
+import ServiceDepartment from "../services/ServiceDepartment";
 import UserRequest from "@/components/UserRequest.vue";
 
 export default {
   data(){
     return{
-        requests: [],
-        timer: null,
+        requests: [{student_id: 0}, {student_id: 1}, {student_id: 2}],
+        department_id: null,
     }
   },
   components: {
@@ -13,10 +14,10 @@ export default {
   },
   methods: {
   async updateRequests(){
-    if (this.themeID!=null){
+    if (this.department_id!=null){
       try {
-          const response = (await MessagesService.getMessagesInTopic(this.$store.state.user.user_id, this.themeID)).data
-          this.requests = response.messages_id
+          const response = (await ServiceDepartment.getDepartamentVerifyList(this.department_id)).data
+          this.requests = response.students
           this.error = ""
           } catch (error) {
               this.error = error.response.data.error
@@ -56,7 +57,7 @@ export default {
                 <b-container fluid style="position:relative; overflow-y:auto; height:500px">
                     <div class="my-3" v-for="request in requests">
                         <UserRequest
-                            :user_id="request.user_id"
+                            :student_id="request.student_id"
                         ></UserRequest>
                     </div>
                 </b-container>
