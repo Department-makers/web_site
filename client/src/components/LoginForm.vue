@@ -1,7 +1,7 @@
 <script>
-import AuthenticationService from '@/services/AuthenticationService'
-import GroupsService from '@/services/GroupsService'
-import DepartmentsService from '@/services/DepartmentsService'
+import ServiceUser from '../services/ServiceUser'
+import ServiceGroup from '../services/ServiceGroup'
+import ServiceAuthentication from '../services/ServiceAuthentication'
 
 export default {
   data () {
@@ -17,20 +17,13 @@ export default {
       Logging: true,
       roles: [  { value: 0, text: 'Студент' },
                 { value: 1, text: 'Преподаватель' },],
-      groups: [],
       groupsOptions : [],
-      departments: [],
-      departmentsOptions: []
     }
   },
   async mounted () {
-    this.groups = (await GroupsService.index()).data
-    for (var i in this.groups){
-        this.groupsOptions.push({value: i, text: this.groups[i].short_name})
-    }
-    this.departments = (await DepartmentsService.index()).data
-    for (var i in this.departments){
-        this.departmentsOptions.push({value: i, text: this.departments[i].short_name})
+    const groups = (await ServiceGroup.groupList()).data.groups
+    for (var i in groups){
+        this.groupsOptions.push({value: i, text: await ServiceGroup.groupInfo(i).short_name})
     }
   },
   methods: {
@@ -41,30 +34,33 @@ export default {
     async submit () {
         if (this.Logging) {
             try {
-            const response = await AuthenticationService.login({
+            const response = await ServiceAuthentication.getJwtByLogin({
                 email: this.email,
                 password: this.password
             })
-            this.$store.dispatch('setToken', response.data.token)
-            this.$store.dispatch('setUser', response.data.user)
+            this.$store.dispatch('setAccessToken', response.data.access_token)
+            this.$store.dispatch('setUpdateToken', response.data.refresh_token)
+            this.response = await ServiceAuthentication.checkJwt(this.$store.state.access_token, this.$store.state.refresh_token)
+            this.$store.dispatch('setUserID', response.data.user_id)
             } catch (error) {
                 this.error = error.response.data.error
             }
         }
         else {
             try {
-            const response = await AuthenticationService.register({
+            const response = await ServiceUser.create({
                 first_name: this.firstName,
-                last_name: this.lastName,
-                role_id: this.roleID,
-                //departmentID: this.departmentID,
+                second_name: this.lastName,
+                role: this.roleID + 1,
                 email: this.email,
                 password: this.password,
-                photo_path: '',
-                is_verified: false,
+                photo: {},
+                groupID: this.groupID,
             })
-            this.$store.dispatch('setToken', response.data.token)
-            this.$store.dispatch('setUser', response.data.user)
+            this.$store.dispatch('setAccessToken', response.data.access_token)
+            this.$store.dispatch('setUpdateToken', response.data.refresh_token)
+            this.response = await ServiceAuthentication.checkJwt(this.$store.state.access_token, this.$store.state.refresh_token)
+            this.$store.dispatch('setUserID', response.data.user_id)
             } catch (error) {
                 this.error = error.response.data.error
             }

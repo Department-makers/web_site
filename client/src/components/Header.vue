@@ -1,4 +1,5 @@
 <script>
+import ServiceUser from '../services/ServiceUser';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@popperjs/core';
 export default {
@@ -9,6 +10,14 @@ export default {
       this.$router.push({
         name: 'home'
       })
+    }
+  },
+  async mounted(){
+    this.userData = (await (ServiceUser.info(this.$store.state.user_id))).data
+  },
+  data(){
+    return {
+      userData: {first_name:"", second_name:""}
     }
   }
 }
@@ -24,8 +33,6 @@ export default {
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
   
       <b-collapse id="nav-collapse" is-nav>
-  
-      <!-- Right aligned nav items -->
 
         <b-navbar-nav class="ms-auto" v-show="($store.state.isUserLoggedIn)">
   
@@ -60,7 +67,7 @@ export default {
             <template #button-content>
               <button type="submit">
                 <img src="https://www.dvfu.ru/html/images/logos/logo_mu_base.png" class="img-responsive" alt="">
-                <label class="btn btn-link">{{($store.state.user.last_name) || null}} {{($store.state.user.first_name) || null}}</label>
+                <label class="btn btn-link">{{(userData.second_name) || null}} {{(userData.first_name) || null}}</label>
               </button>
             </template>
             <b-dropdown-item>

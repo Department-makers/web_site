@@ -18,7 +18,7 @@ export default {
     date: "",
   },
   async mounted(){
-    this.isMyMessage = (this.$store.state.user.user_id == this.user_id)
+    this.isMyMessage = (this.$store.state.user_id == this.user_id)
   },
 }
 </script>

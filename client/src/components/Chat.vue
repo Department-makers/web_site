@@ -1,6 +1,6 @@
 <script>
 import ChatMessage from "@/components/ChatMessage.vue";
-import MessagesService from "../services/MessagesService";
+import ServiceMessage from "../services/ServiceMessage";
 
 export default {
   data(){
@@ -21,7 +21,7 @@ export default {
     async updateChat(){
         if (this.themeID!=null){
             try {
-                const response = (await MessagesService.getMessagesInTopic(this.$store.state.user.user_id, this.themeID)).data
+                const response = (await ServiceMessage.getMessagePerson(this.$store.state.user_id, this.themeID)).data
                 this.messages = response.messages_id
                 this.error = ""
                 } catch (error) {
@@ -31,12 +31,14 @@ export default {
     },
     async sendMessage(){
         if (this.message!=""){
+            const date = new Date();
+            const currentDate = `${date.getDate()}/${ date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
             try {
-            const response = await MessagesService.post({
+            const response = await ServiceMessage.createMessage({
                 user_id: this.$store.state.user.user_id,
                 topic_id: this.themeID,
                 text: this.message,
-                sent: "2/2/23",
+                sent: currentDate,
                 file: "",
                 private: 0,
             })

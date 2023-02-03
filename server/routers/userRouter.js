@@ -49,6 +49,7 @@ router.post('/group/subject', groupController.groupSubject) //group_subjects
 router.post('/group/can_see', groupController.canSeeGroup) //can_see_groupe
 router.post('/group/subject/add', groupController.addGroupSubject) //add_group_subject
 router.post('/group/subject/remove', groupController.removeGroupSubject) //remove_group_subject
+router.post('/group/list', groupController.groupsList)//get_groups_list
 
 
 //subject
@@ -75,7 +76,7 @@ router.post('/topic/create', topicController.createTopic) //create_topic
 router.post('/topic/remove', topicController.removeTopic) //remove_topic
 router.post('/topic/rename', topicController.renameTopic) //rename_topic
 router.post('/topic/can_see', topicController.canSeeTopic) //can_see_topic
-
+router.post('/topic/get_subject', topicController.getTopics) //get_topics
 
 //message
 router.post('/message/create', messageController.createMessage) //create_message

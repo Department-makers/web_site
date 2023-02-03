@@ -20,6 +20,15 @@ class groupController {
             res.json(e)
         }
     }
+    groupsList(req, res) {
+        try {
+        const user = req.body.user_id
+        //отправить в api
+        res.json('groups_list')
+        } catch(e) {
+            res.json(e)
+        }
+    }
     changeGroup(req, res) {
         try {
             const user = req.body

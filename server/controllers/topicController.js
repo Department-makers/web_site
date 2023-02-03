@@ -1,6 +1,15 @@
 
 
 class topicController {
+    getTopics(req, res) {
+        try {
+            const user = req.params.id
+            //отправить в api
+            res.json('create_topic')
+        } catch(e) {
+            res.json(e)
+        }
+    }  
     createTopic(req, res) {
         try {
             const user = req.params.id

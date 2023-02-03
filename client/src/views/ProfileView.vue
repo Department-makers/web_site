@@ -1,17 +1,16 @@
 <script>
+import ServiceUser from '../services/ServiceUser'
+import ServiceStudent from '../services/ServiceStudent'
 export default {
-  data () {
+  data(){
     return {
-      firstName: this.$store.getters.user.firstName,
-      lastName: this.$store.getters.user.secondName,
-      groupID: this.$store.getters.user.groupID,
-      roleID: this.$store.getters.user.roleID,
-      email: this.$store.getters.user.email,
+      userData: {first_name:"", second_name:""},
       error: null,
+      isVerified: false
     }
   },
   methods: {
-    getToLoginPage () {
+    async getToLoginPage () {
       if (!(this.$store.state.isUserLoggedIn)){
         this.$router.push({
         name: 'home'
@@ -22,13 +21,17 @@ export default {
   beforeMount(){
     this.getToLoginPage()
   },
+  async mounted(){
+    this.isVerified = (await (ServiceStudent.is_verifyed(this.$store.state.user_id))).data.is_verified
+    this.userData = (await (ServiceUser.info(this.$store.state.user_id))).data
+  }
 }
 </script>
 
 <template>
   <div class="content my-3 mb-6">
     <div class="container">
-        <h1>Беляков Олег Викторович</h1>
+        <h1>{{ userData.second_name }} {{ userData.first_name }}</h1>
         <div class="text-muted mb-4">01.03.02 Прикладная математика и информатика, Очная, Институт математики и компьютерных технологий (Школа)</div>
           <div class="row mt-4">
             <div class="col-12 col-md-8 col-lg-9">
@@ -50,18 +53,14 @@ export default {
                           </div>    
                         </div>
                         <div class="col-12 col-lg-9 row">
-                            <div class="col-12 col-lg-4 mb-1 mb-lg-3">Логин:</div>
-                            <div class="col-12 col-lg-8 mb-3">belyakov.ov</div>
+                            <div class="col-12 col-lg-4 mb-1 mb-lg-3">Имя</div>
+                            <div class="col-12 col-lg-8 mb-3">{{ userData.first_name }}</div>
                           <div class="w-100"></div>
-                            <div class="col-12 col-lg-4 mb-1 mb-lg-3">Дата рождения:</div>
-                            <div class="col-12 col-lg-8 mb-3">19.02.2003</div>
+                            <div class="col-12 col-lg-4 mb-1 mb-lg-3">Фамилия</div>
+                            <div class="col-12 col-lg-8 mb-3">{{ userData.second_name }}</div>
                           <div class="w-100"></div>
                             <div class="col-12 col-lg-4 mb-1 mb-lg-3">Адрес эл. почты:</div>
-                          <div class="col-12 col-lg-8 mb-3">
-                            <div class="input-group profile-info-field">
-                              <input type="email" id="email" name="email" class="form-control" value="oleg65play@gmail.com" disabled="">
-                            </div>
-                          </div>
+                            <div class="col-12 col-lg-8 mb-3">{{ userData.email }}</div>
                           <div class="w-100"></div>  
                         </div>
                       </div>

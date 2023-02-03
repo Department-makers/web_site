@@ -3,9 +3,7 @@
 class userController {
     createUser(req, res) {
         try {
-        const user = req.body
-        //отправить в api
-        res.json("create_user")
+            res.json('create_user ' + req.headers['auth'])
         } catch(e) {
             res.json(e)
         }
@@ -67,8 +65,9 @@ class userController {
     userInfo(req, res) {
         try {
             const user = req.params.id
-            //отправить в api
-            res.json('user_info')
+            //отправить в apI
+            const r = {first_name: "Олег", second_name: "Викторович", role_id: 1}
+            res.send(r)
         } catch(e) {
             res.json(e)
         }

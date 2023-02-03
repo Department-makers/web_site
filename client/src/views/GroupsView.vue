@@ -1,12 +1,14 @@
 <script>
-import GroupsService from '@/services/GroupsService'
-import SubjectsService from '@/services/SubjectsService'
-import ThemesService from '@/services/ThemesService'
+import ServiceGroup from '../services/ServiceGroup';
+import ServiceDepartment from '../services/ServiceDepartment';
+import ServiceTopic from '../services/ServiceTopic';
+import ServiceUser from '../services/ServiceUser';
 import Chat from "@/components/Chat.vue";
 
 export default {
   data(){
     return{
+      userData: {role_id: 0},
       groupID: null,
       subjectID: null,
       themeID: null,
@@ -31,7 +33,7 @@ export default {
     if (this.groupID != null){
       this.themesOptions = []
       this.themeID = null
-      const subjects = (await SubjectsService.getGroupSubjects(this.groupID)).data
+      const subjects = (await ServiceGroup.groupSubject(this.groupID)).data 
       this.subjectID = null
       this.subjectsOptions = []
       for (var i in subjects){
@@ -41,7 +43,7 @@ export default {
   },
   async updateThemes(){
     if (this.subjectID != null){
-      const themes = (await ThemesService.getSubjectThemes(this.subjectID)).data
+      const themes = (await ServiceTopic.getTopicsSubject(this.subjectID)).date
       this.themeID = null
       this.themesOptions = []
       for (var i in themes){
@@ -54,10 +56,12 @@ export default {
     this.getToLoginPage()
   },
   async mounted(){
-    this.groups = (await GroupsService.index()).data
-    if (this.$store.state.user.role_id == 0){
-      let group = (await GroupsService.getUserGroup(this.$store.state.user.user_id)).data
-      this.groupsOptions.push({value: 0, text: group.short_name})
+    this.userData = (await (ServiceUser.info(this.$store.state.user_id))).data
+    let userGroupID = (await ServiceGroup.getGroup(this.$store.state.user_id)).data
+    let userGroup = (await ServiceGroup.groupInfo(userGroupID)).data
+    this.groups = await ServiceDepartment.getDepartamentGroup(userGroup.department_id).data
+    if (this.$store.state.user.role_id == 1){
+      this.groupsOptions.push({value: 0, text: userGroup.short_name})
       this.groupID = 0
       this.updateSubjects()
     } else{
@@ -78,7 +82,7 @@ export default {
             <div class="col-12 col-md-4 col-lg-3">
               <div class="card shadow-sm">
                 <div class="card-body p-auto text-center">
-                      <div class="form-group" id="form-group" v-show="$store.state.user.role_id != 0">
+                      <div class="form-group" id="form-group" v-show="userData.role_id != 0">
                         <b-form-select v-model="groupID" class="fs-6 fw-bold form-select btn btn-light" role="combobox" :options="groupsOptions" id="form-select" @change="updateSubjects">
                           <template #first>
                             <b-form-select-option :value="null" disabled>-Группа-</b-form-select-option>
@@ -95,7 +99,7 @@ export default {
                       <div class="form-group" id="form-group">
                         <b-form-select v-model="themeID" class="fs-6 fw-bold form-select btn btn-light" role="combobox" :options="themesOptions" id="form-select" @change="$refs.chatRef.updateChat()">
                           <template #first>
-                            <b-form-select-option :value="null" disabled>-Тема-</b-form-select-option>
+                            <b-form-select-option :value="null" disabled>-Раздел-</b-form-select-option>
                           </template>
                         </b-form-select>
                       </div>
