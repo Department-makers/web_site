@@ -18,6 +18,7 @@ export default {
     date: "",
   },
   async mounted(){
+    console.log(this.$store.state.user_id)
     this.isMyMessage = (this.$store.state.user_id == this.user_id)
   },
 }

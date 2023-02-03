@@ -40,8 +40,8 @@ export default {
             })
             this.$store.dispatch('setAccessToken', response.data.access_token)
             this.$store.dispatch('setUpdateToken', response.data.refresh_token)
-            this.response = await ServiceAuthentication.checkJwt(this.$store.state.access_token, this.$store.state.refresh_token)
-            this.$store.dispatch('setUserID', response.data.user_id)
+            const checkRes = await ServiceAuthentication.checkJwt(this.$store.state.access_token, this.$store.state.refresh_token)
+            this.$store.dispatch('setUserID', checkRes.data.user_id)
             } catch (error) {
                 this.error = error.response.data.error
             }

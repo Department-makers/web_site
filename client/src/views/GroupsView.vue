@@ -13,7 +13,7 @@ export default {
       subjectID: null,
       themeID: null,
       groups: [],
-      groupsOptions : [],
+      groupsOptions : [{value: 0, text: "СП-3"}, {value: 1, text: "СП-2"},],
       subjectsOptions: [],
       themesOptions: [],
     }
@@ -35,7 +35,7 @@ export default {
       this.themeID = null
       const subjects = (await ServiceGroup.groupSubject(this.groupID)).data 
       this.subjectID = null
-      this.subjectsOptions = []
+      this.subjectsOptions = [{value: 0, text: "СП-3-Матан"}, {value: 1, text: "СП-3-Базы Данных"}]
       for (var i in subjects){
           this.subjectsOptions.push({value: i, text: subjects[i].name})
         }
@@ -45,7 +45,7 @@ export default {
     if (this.subjectID != null){
       const themes = (await ServiceTopic.getTopicsSubject(this.subjectID)).date
       this.themeID = null
-      this.themesOptions = []
+      this.themesOptions = [{value: 0, text: "Скоро экзамен"},]
       for (var i in themes){
           this.themesOptions.push({value: i, text: themes[i].name})
         }

@@ -35,7 +35,7 @@ export default {
             const currentDate = `${date.getDate()}/${ date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
             try {
             const response = await ServiceMessage.createMessage({
-                user_id: this.$store.state.user.user_id,
+                user_id: this.$store.state.user_id,
                 topic_id: this.themeID,
                 text: this.message,
                 sent: currentDate,
