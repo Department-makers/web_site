@@ -51,10 +51,11 @@ export default {
             const response = await ServiceUser.create({
                 first_name: this.firstName,
                 second_name: this.lastName,
-                role: this.roleID + 1,
+                role_id: this.roleID + 1,
                 email: this.email,
                 password: this.password,
-                photo: {},
+                photo_path: {},
+                is_verified: false,
                 groupID: this.groupID,
             })
             this.$store.dispatch('setAccessToken', response.data.access_token)
@@ -93,12 +94,6 @@ export default {
             <div class="form-group" id="form-group" v-show="!Logging && roleID == 0">
                 <label>Группа</label>
                 <b-form-select v-model="groupID" :options="groupsOptions" id="form-group-inner">
-                </b-form-select>
-            </div>
-
-            <div class="form-department" id="form-department" v-show=false>
-                <label>Кафедра</label>
-                <b-form-select v-model="departmentID" :options="departmentsOptions" id="form-department-inner">
                 </b-form-select>
             </div>
 

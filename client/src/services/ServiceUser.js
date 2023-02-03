@@ -2,7 +2,7 @@ import Api from '@/services/Api'
 
 export default {
     //Создать
-    create (data = {first_name, second_name, role, email, password, photo:{},}){
+    create (data = {first_name, second_name, role_id, email, password, photo_path:{}, is_verified}){
         return Api().post('/user/create', data)
     },
     //Удалить
