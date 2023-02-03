@@ -16,12 +16,45 @@ export default {
       groupsOptions : [{value: 0, text: "СП-3"}, {value: 1, text: "СП-2"},],
       subjectsOptions: [],
       themesOptions: [],
+      newThemeTitle: "",
     }
   },
   components: {
     Chat
   },
   methods: {
+    async newTheme(){
+    if (this.newThemeTitle != "" && this.subjectID != null){
+      try {
+            const response = await ServiceTopic.createTopic({
+                subject_id: this.subjectID,
+                name: this.newThemeTitle,
+            }).data
+            if (response.code == 0){
+              this.updateThemes()
+            }
+            this.newThemeTitle = ""
+            this.error = ""
+            } catch (error) {
+                this.error = error.response.data.error
+            }
+    }
+  },
+  async removeTheme(){
+    if (this.themeID != null){
+      try {
+            const response = await ServiceTopic.removeTopic({
+                topic_id: this.themeID
+            }).data
+            if (response.code == 0){
+              this.updateThemes()
+            }
+            this.error = ""
+            } catch (error) {
+                this.error = error.response.data.error
+            }
+    }
+  },
   getToLoginPage () {
     if (!(this.$store.state.isUserLoggedIn)){
       this.$router.push({
@@ -103,6 +136,17 @@ export default {
                           </template>
                         </b-form-select>
                       </div>
+                      <div class="row">
+                          <button type="submit" class="fs-5 btn col-sm-auto" v-on:click="removeTheme()" style="color:red">
+                            <b-icon-dash-circle></b-icon-dash-circle>
+                          </button>
+                        <div class="col-sm w-50">
+                            <input type="text" class="form-control" v-model="newThemeTitle" placeholder="">
+                        </div>
+                          <button type="submit" class="fs-5 btn col-sm-auto" v-on:click="newTheme()" style="color:green">
+                            <b-icon-plus-circle></b-icon-plus-circle>
+                          </button>
+                    </div>
                 </div>
               </div>
             </div>

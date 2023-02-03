@@ -79,7 +79,7 @@ export default {
             <div class="card" id="send-message">
                 <div class="row">
                     <div class="col-sm-10">
-                        <input type="text" class="form-control form-control" v-model="message" placeholder="">
+                        <input type="text" class="form-control" v-model="message" placeholder="">
                     </div>
                     <div class="col-sm-auto" id="submit-button-outer">
                         <button type="submit" id="submit-button-inner" class="btn btn-primary">
