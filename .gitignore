@@ -9,6 +9,7 @@ package-lock.json
 
 #fake backend
 server_fake/
+client/
 
 #secret files
 .env
