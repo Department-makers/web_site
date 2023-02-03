@@ -78,7 +78,7 @@ export default {
             <div class="col-12 col-md-4 col-lg-3">
               <div class="card shadow-sm">
                 <div class="card-body p-auto text-center">
-                      <div class="form-group" id="form-group">
+                      <div class="form-group" id="form-group" v-show="$store.state.user.role_id != 0">
                         <b-form-select v-model="groupID" class="fs-6 fw-bold form-select btn btn-light" role="combobox" :options="groupsOptions" id="form-select" @change="updateSubjects">
                           <template #first>
                             <b-form-select-option :value="null" disabled>-Группа-</b-form-select-option>

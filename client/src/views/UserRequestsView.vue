@@ -47,7 +47,7 @@ export default {
 
 <template>
   <header >
-    <div class="content mt-5">
+    <div class="content my-5">
       <div class="container" style="width:fit-content">
         <h1>Заявки на регистрацию</h1>
         <div class="row mt-1">
