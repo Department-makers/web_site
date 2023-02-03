@@ -70,7 +70,9 @@ export default {
       this.subjectID = null
       this.subjectsOptions = [{value: 0, text: "СП-3-Матан"}, {value: 1, text: "СП-3-Базы Данных"}]
       for (var i in subjects){
+        if (subjects[i].name != null) {
           this.subjectsOptions.push({value: i, text: subjects[i].name})
+        }
         }
     }
   },
@@ -80,7 +82,9 @@ export default {
       this.themeID = null
       this.themesOptions = [{value: 0, text: "Скоро экзамен"},]
       for (var i in themes){
+        if (themes[i].name != null) {
           this.themesOptions.push({value: i, text: themes[i].name})
+        }
         }
     }
   }
