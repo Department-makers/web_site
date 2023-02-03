@@ -136,12 +136,12 @@ export default {
                           </template>
                         </b-form-select>
                       </div>
-                      <div class="row">
+                      <div class="row" id="topicsControls" v-show="themeID!=null">
                           <button type="submit" class="fs-5 btn col-sm-auto" v-on:click="removeTheme()" style="color:red">
                             <b-icon-dash-circle></b-icon-dash-circle>
                           </button>
                         <div class="col-sm w-50">
-                            <input type="text" class="form-control" v-model="newThemeTitle" placeholder="">
+                            <input type="text" class="form-control" v-model="newThemeTitle" placeholder="Новый раздел">
                         </div>
                           <button type="submit" class="fs-5 btn col-sm-auto" v-on:click="newTheme()" style="color:green">
                             <b-icon-plus-circle></b-icon-plus-circle>
