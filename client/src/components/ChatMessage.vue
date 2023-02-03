@@ -25,13 +25,13 @@ export default {
 
 <template>
     <div class="card p-1" v-bind:class="{'my-message': (isMyMessage), 'other-message': (!isMyMessage)}" id="chat-outer">
-        <label style="color:rgb(240, 240, 240)">
+        <label style="color:rgb(70, 70, 70)">
             {{ name }}
         </label>
-        <label style="color:rgb(165, 165, 165); font-size: x-small">
+        <label style="color:rgb(110, 110, 110); font-size: x-small">
             {{ date }}
         </label>
-        <label style="color:white">
+        <label style="color:rgb(70, 70, 70)">
             {{ text }}
         </label>
     </div>
@@ -40,12 +40,12 @@ export default {
 <style scoped>
 .my-message{
   text-align: end;
-  background-color: #1c507ad3;
+  background-color: #c1e3ffd3;;
 }
 
 .other-message{
   text-align: start;
-  background-color: rgba(48, 48, 48, 0.781);
+  background-color: rgb(183 183 183);
 }
 
 </style>

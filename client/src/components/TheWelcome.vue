@@ -1,14 +1,14 @@
 <script>
 export default {
   methods: {
-  getToGroupPage () {
+  getToProfilePage () {
     this.$router.push({
-    name: 'groups'
+    name: 'profile'
     })
   },
   },
   beforeMount(){
-    this.getToGroupPage()
+    this.getToProfilePage()
   },
 }
 </script>
