@@ -5,7 +5,7 @@ class jwtController {
         try {
             const request = req.body
             //send api
-            res.json('get_jwt_by_login')
+            res.send({access_token: "eeee", refresh_token: "ddwwd"})
         } catch(e) {            
             res.json(e)
         }
@@ -14,7 +14,7 @@ class jwtController {
         try {
             const request = req.body
             //send api
-            res.json('check_jwt')
+            res.send({user_id: 0})
         } catch(e) {            
             res.json(e)
         }

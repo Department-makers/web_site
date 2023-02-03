@@ -66,7 +66,7 @@ class userController {
         try {
             const user = req.params.id
             //отправить в apI
-            const r = {first_name: "Олег", second_name: "Викторович", role_id: 1}
+            const r = {first_name: "Егор", second_name: "Максимов", role_id: 1, email: "eg@gmail.com"}
             res.send(r)
         } catch(e) {
             res.json(e)
