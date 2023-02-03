@@ -56,20 +56,22 @@ export default {
               </RouterLink>
           </b-nav-item>
   
-          <b-nav-item-dropdown right class="btn">
+          <b-nav-item-dropdown right class="text-start btn">
             <template #button-content>
               <button type="submit">
                 <img src="https://www.dvfu.ru/html/images/logos/logo_mu_base.png" class="img-responsive" alt="">
                 <label class="btn btn-link">{{($store.state.user.last_name) || null}} {{($store.state.user.first_name) || null}}</label>
               </button>
             </template>
-            <b-dropdown-item href="/me">
-              <b-icon icon="person-fill"></b-icon>
-              <label class="btn btn-link">Мой кабинет</label>
+            <b-dropdown-item>
+              <RouterLink class="ProfileLink btn btn-light" to="/me">
+                  <b-icon class="img-responsive" icon="person-fill"></b-icon>
+                  <label class="btn btn-link">Мой кабинет</label>
+              </RouterLink>
             </b-dropdown-item>
-            <b-dropdown-item class="btn btn-link">
-              <button v-on:click="logOut()" class="btn">
-                <b-icon icon="power" aria-hidden="true"></b-icon>
+            <b-dropdown-item >
+              <button type="submit" class="btn btn-light" v-on:click="logOut()">
+                <b-icon class="img-responsive" icon="power" aria-hidden="true"></b-icon>
                 <label class="btn btn-link">Выход</label>
               </button>
             </b-dropdown-item>

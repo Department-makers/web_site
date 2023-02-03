@@ -77,25 +77,25 @@ export default {
           <div class="row mt-1">
             <div class="col-12 col-md-4 col-lg-3">
               <div class="card shadow-sm">
-                <div class="card-body p-5 text-center">
+                <div class="card-body p-auto text-center">
                       <div class="form-group" id="form-group">
-                        <b-form-select v-model="groupID" class="btn dropdown-toggle btn-light" role="combobox" :options="groupsOptions" id="form-select" @change="updateSubjects">
+                        <b-form-select v-model="groupID" class="fs-6 fw-bold form-select btn btn-light" role="combobox" :options="groupsOptions" id="form-select" @change="updateSubjects">
                           <template #first>
-                            <b-form-select-option :value="null" disabled>-Выберете группу-</b-form-select-option>
+                            <b-form-select-option :value="null" disabled>-Группа-</b-form-select-option>
                           </template>
                         </b-form-select>
                       </div>
                       <div class="form-group" id="form-group">
-                        <b-form-select v-model="subjectID" class="btn dropdown-toggle btn-light" role="combobox" :options="subjectsOptions" id="form-select" @change="updateThemes">
+                        <b-form-select v-model="subjectID" class="fs-6 fw-bold form-select btn btn-light" role="combobox" :options="subjectsOptions" id="form-select" @change="updateThemes">
                           <template #first>
-                            <b-form-select-option :value="null" disabled>-Выберете дисциплину-</b-form-select-option>
+                            <b-form-select-option :value="null" disabled>-Дисциплина-</b-form-select-option>
                           </template>
                         </b-form-select>
                       </div>
                       <div class="form-group" id="form-group">
-                        <b-form-select v-model="themeID" class="btn dropdown-toggle btn-light" role="combobox" :options="themesOptions" id="form-select" @change="$refs.chatRef.updateChat()">
+                        <b-form-select v-model="themeID" class="fs-6 fw-bold form-select btn btn-light" role="combobox" :options="themesOptions" id="form-select" @change="$refs.chatRef.updateChat()">
                           <template #first>
-                            <b-form-select-option :value="null" disabled>-Выберете тему-</b-form-select-option>
+                            <b-form-select-option :value="null" disabled>-Тема-</b-form-select-option>
                           </template>
                         </b-form-select>
                       </div>
@@ -126,5 +126,7 @@ export default {
 #form-select{
   border-radius: 5%;
   padding: 1%;
+  font-family: "Gill Sans", sans-serif;
 }
+
 </style>

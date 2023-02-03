@@ -30,7 +30,8 @@ export default {
         }
     },
     async sendMessage(){
-        try {
+        if (this.message!=""){
+            try {
             const response = await MessagesService.post({
                 user_id: this.$store.state.user.user_id,
                 topic_id: this.themeID,
@@ -44,6 +45,7 @@ export default {
             } catch (error) {
                 this.error = error.response.data.error
             }
+        }
     }
   },
   async mounted(){
@@ -79,7 +81,7 @@ export default {
                     </div>
                     <div class="col-sm-auto" id="submit-button-outer">
                         <button type="submit" id="submit-button-inner" class="btn btn-primary">
-                            <b-icon-arrow-up></b-icon-arrow-up>
+                            <b-icon-chat-dots></b-icon-chat-dots>
                         </button>
                     </div>
                 </div>
@@ -89,6 +91,11 @@ export default {
 </template>
 
 <style scoped>
+textarea{
+    resize: none;
+    max-height: 20px;
+}
+
 #submit-button-outer{
     vertical-align: auto;
 }
