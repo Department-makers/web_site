@@ -1,8 +1,12 @@
 <script>
+import ServiceUser from '../services/ServiceUser'
+
 export default {
   data(){
     return{
       isMyMessage: false,
+      nameV: "",
+      userData: {first_name: "", second_name: ""},
     }
   },
   components: {
@@ -18,8 +22,10 @@ export default {
     date: "",
   },
   async mounted(){
+    this.userData = (await (ServiceUser.info(this.user_id))).data
     console.log(this.$store.state.user_id)
     this.isMyMessage = (this.$store.state.user_id == this.user_id)
+    this.nameV = this.user_id ? "Чугунков Максим" :  "Максимов Егор"
   },
 }
 </script>
@@ -27,7 +33,7 @@ export default {
 <template>
     <div class="card p-1" v-bind:class="{'my-message': (isMyMessage), 'other-message': (!isMyMessage)}" id="chat-outer">
         <label style="color:rgb(70, 70, 70)">
-            {{ name }}
+            {{ nameV }}
         </label>
         <label style="color:rgb(110, 110, 110); font-size: x-small">
             {{ date }}

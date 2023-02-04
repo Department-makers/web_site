@@ -14,7 +14,7 @@ export default {
       themeID: null,
       groups: [],
       groupsOptions : [{value: 0, text: "СП-3"}, {value: 1, text: "СП-2"},],
-      subjectsOptions: [],
+      subjectsOptions: [{value: 0, text: "СП-3-Матан"}, {value: 1, text: "СП-3-Базы Данных"}],
       themesOptions: [],
       newThemeTitle: "",
     }
@@ -119,7 +119,7 @@ export default {
             <div class="col-12 col-md-4 col-lg-3">
               <div class="card shadow-sm">
                 <div class="card-body p-auto text-center">
-                      <div class="form-group" id="form-group" v-show="userData.role_id != 0">
+                      <div class="form-group" id="form-group" v-show="userData.role_id != 1">
                         <b-form-select v-model="groupID" class="fs-6 fw-bold form-select btn btn-light" role="combobox" :options="groupsOptions" id="form-select" @change="updateSubjects">
                           <template #first>
                             <b-form-select-option :value="null" disabled>-Группа-</b-form-select-option>

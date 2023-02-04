@@ -62,6 +62,8 @@ export default {
                             <div class="col-12 col-lg-4 mb-1 mb-lg-3">Адрес эл. почты:</div>
                             <div class="col-12 col-lg-8 mb-3">{{ userData.email }}</div>
                           <div class="w-100"></div>  
+                            <div class="col-12 col-lg-4 mb-1 mb-lg-3">Роль</div>
+                            <div class="col-12 col-lg-8 mb-3">Студент</div>
                         </div>
                       </div>
                     </div>
